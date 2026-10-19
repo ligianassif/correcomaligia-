@@ -14,7 +14,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:'Bricolage Grote
 main{max-width:720px;margin:0 auto;padding:20px 16px 48px}
 .foto{display:block;width:100%;border-radius:20px;margin-top:8px}.logo{display:block;width:min(190px,55%);margin:12px auto 0;border-radius:16px;background:#F8F7F2}h1{font-size:clamp(1.9rem,8vw,3rem);line-height:1;font-weight:800;margin:16px 0 8px;letter-spacing:-.02em;text-align:center}.sub{text-align:center}nav button[aria-selected="true"],.chip[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--on)}
 .sub{color:var(--mut);margin:0 0 20px}
-nav{display:flex;gap:6px;overflow-x:auto;margin-bottom:16px}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
 nav button,.chip,.btn{font:inherit;border:2px solid var(--ink);background:transparent;color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
 
 .btn{background:var(--acc);border-color:var(--acc);color:var(--on);font-weight:600;text-decoration:none;display:inline-block}
@@ -31,6 +31,7 @@ input,select{font:inherit;width:100%;padding:10px;border-radius:10px;border:2px 
 .res{font-size:2.4rem;font-weight:800;margin:18px 0 4px}
 .note{font-size:.85rem;color:var(--mut)}
 [hidden]{display:none!important}
+details{background:var(--card);border-radius:14px;padding:12px 16px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}details p{margin:8px 0 0;color:var(--mut)}
 </style>
 </head>
 <body>
@@ -53,8 +54,12 @@ input,select{font:inherit;width:100%;padding:10px;border-radius:10px;border:2px 
 
 <section id="parceiros" hidden>
 <div id="cupons"></div>
-<div class="item"><div><b>Produtos que eu recomendo</b><small>Minha seleção no Mercado Livre</small></div><a class="btn" id="ml" target="_blank" rel="noopener">Ver lista</a></div>
 <p class="note">Toque no cupom para copiar e aplique no carrinho da loja parceira.</p>
+</section>
+
+<section id="loja" hidden>
+<div class="item"><div><b>Minha lojinha na Shopee</b><small>Minha seleção de produtos</small></div><a class="btn" href="https://collshp.com/ligianassif181?view=storefront&utm_source=beacons&utm_medium=lib_share&utm_campaign=ligianassif" target="_blank" rel="noopener">Ver loja</a></div>
+<div class="item"><div><b>Produtos que eu recomendo</b><small>Minha lista no Mercado Livre</small></div><a class="btn" id="ml" target="_blank" rel="noopener">Ver lista</a></div>
 </section>
 
 <section id="pace" hidden>
@@ -74,6 +79,13 @@ input,select{font:inherit;width:100%;padding:10px;border-radius:10px;border:2px 
 <div class="g" style="grid-template-columns:1fr 1fr;margin-bottom:16px"><div class="item" style="display:block;margin:0"><small>5 km</small><b style="font-size:1.5rem;color:var(--acc)">24:30</b></div><div class="item" style="display:block;margin:0"><small>10 km</small><b style="font-size:1.5rem;color:var(--acc)">49:32</b></div><div class="item" style="display:block;margin:0"><small>15 km</small><b style="font-size:1.5rem;color:var(--acc)">1:18:47</b></div><div class="item" style="display:block;margin:0"><small>21 km</small><b style="font-size:1.5rem;color:var(--acc)">1:52:52</b></div></div>
 <div class="row"><a class="btn" href="https://wa.me/5521973358186" target="_blank" rel="noopener">Chamar no WhatsApp</a><a class="btn" id="ig" target="_blank" rel="noopener">Chamar no Instagram</a><a class="btn" id="igc" target="_blank" rel="noopener">Instagram do LiPace Club</a><a class="btn" id="st" target="_blank" rel="noopener">Meu Strava</a></div>
 </section>
+<h2 style="font-size:1.4rem;margin:36px 0 12px">Perguntas frequentes</h2>
+<details><summary>Onde você atende?</summary><p>Atendo presencialmente na Freguesia, em Jacarepaguá, e também online. Chame no WhatsApp para combinar.</p></details>
+<details><summary>Como funcionam as planilhas de treino e corrida?</summary><p>Chame no WhatsApp e conte seu objetivo e a prova que quer correr. A partir daí eu monto o treino com você.</p></details>
+<details><summary>Como uso os cupons?</summary><p>Na aba Parceiros, toque no cupom para copiá-lo e aplique no carrinho do site da loja.</p></details>
+<details><summary>As datas das provas estão sempre certas?</summary><p>Datas, locais e valores vêm dos sites de inscrição e podem mudar. Confirme sempre na página oficial da prova antes de se inscrever.</p></details>
+<details><summary>Como funciona a calculadora de pace?</summary><p>Escolha a distância e o tempo que quer fazer. Ela mostra o pace por quilômetro e faixas de referência para treinar.</p></details>
+<details><summary>O que é o LiPace Club?</summary><p>É a comunidade de corrida e treino para mulheres. Siga no Instagram para conhecer.</p></details>
 </main>
 
 <script>
@@ -118,7 +130,7 @@ const PARCEIROS=[
 
 const $=id=>document.getElementById(id);
 $("nome").textContent=CONFIG.nome;$("ig").href=CONFIG.instagram;$("igc").href=CONFIG.clube;$("st").href=CONFIG.strava;$("ml").href=CONFIG.ml;
-const abas=[["provas","Provas"],["parceiros","Parceiros"],["pace","Calculadora de pace"],["treine","Treine comigo"]];
+const abas=[["provas","Provas"],["parceiros","Parceiros"],["loja","Lojinha"],["pace","Calculadora de pace"],["treine","Treine comigo"]];
 abas.forEach(([id,t],i)=>{const b=document.createElement("button");b.textContent=t;b.setAttribute("role","tab");b.setAttribute("aria-selected",i==0);
 b.onclick=()=>{abas.forEach(([x])=>$(x).hidden=x!=id);[...$("tabs").children].forEach(c=>c.setAttribute("aria-selected",c==b))};$("tabs").append(b)});
 
